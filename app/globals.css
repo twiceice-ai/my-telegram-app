@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Неоморфные переменные */
+:root {
+  --bg-primary: #f0f0f3;
+  --bg-secondary: #ffffff;
+  --shadow-light: #ffffff;
+  --shadow-dark: #d1d9e6;
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --accent-blue: #4299e1;
+  --accent-green: #48bb78;
+  --accent-red: #f56565;
+  --accent-orange: #ed8936;
+}
+
+/* Базовые неоморфные стили */
+.neumorphic {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+}
+
+.neumorphic-inset {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+}
+
+.neumorphic-pressed {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+}
+
+.neumorphic-card {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}
+
+.neumorphic-button {
+  background: var(--bg-primary);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+  transition: all 0.2s ease;
+}
+
+.neumorphic-button:active {
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+}
+
+.neumorphic-input {
+  background: var(--bg-primary);
+  border-radius: 10px;
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  border: none;
+  outline: none;
+}
+
+.neumorphic-input:focus {
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px
+    var(--accent-blue);
+}
+
+/* Цветовые акценты для неоморфизма */
+.neumorphic-blue {
+  background: linear-gradient(145deg, #4299e1, #3182ce);
+  color: white;
+  box-shadow: 4px 4px 8px rgba(66, 153, 225, 0.3), -4px -4px 8px rgba(66, 153, 225, 0.1);
+}
+
+.neumorphic-green {
+  background: linear-gradient(145deg, #48bb78, #38a169);
+  color: white;
+  box-shadow: 4px 4px 8px rgba(72, 187, 120, 0.3), -4px -4px 8px rgba(72, 187, 120, 0.1);
+}
+
+.neumorphic-red {
+  background: linear-gradient(145deg, #f56565, #e53e3e);
+  color: white;
+  box-shadow: 4px 4px 8px rgba(245, 101, 101, 0.3), -4px -4px 8px rgba(245, 101, 101, 0.1);
+}
+
+/* Мобильная оптимизация */
+@media screen and (max-width: 375px) {
+  html {
+    font-size: 14px;
+  }
+
+  .neumorphic {
+    border-radius: 10px;
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  }
+
+  .neumorphic-button {
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  }
+}
+
+@media screen and (min-width: 376px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Специфичные стили для Android (360x640) */
+@media screen and (max-width: 360px) and (max-height: 640px) {
+  .mobile-android {
+    --header-height: 56px;
+    --bottom-nav-height: 60px;
+    --content-padding: 12px;
+  }
+}
+
+/* Специфичные стили для iPhone 12 (375x812) */
+@media screen and (max-width: 375px) and (min-height: 812px) {
+  .mobile-iphone {
+    --header-height: 60px;
+    --bottom-nav-height: 68px;
+    --content-padding: 16px;
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Базовые стили для мобильных устройств */
+.mobile-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 375px;
+  margin: 0 auto;
+  overflow: hidden; /* Скрываем основной скролл */
+  background: var(--bg-primary);
+}
+
+.mobile-header {
+  height: var(--header-height, 56px);
+  padding-top: var(--safe-area-top, 0);
+}
+
+.mobile-content {
+  height: calc(
+    100vh -
+    var(--header-height, 56px) -
+    var(--bottom-nav-height, 60px) -
+    var(--safe-area-top, 0) -
+    var(--safe-area-bottom, 0)
+  );
+  overflow-y: auto;
+  padding: var(--content-padding, 16px);
+}
+
+.mobile-bottom-nav {
+  height: var(--bottom-nav-height, 60px);
+  padding-bottom: var(--safe-area-bottom, 0);
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 375px;
+  z-index: 50;
+}
+
+/* Полное скрытие скроллбаров */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-scrolling: touch;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Скрытие всех скроллбаров по умолчанию */
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Анимации для неоморфизма */
+.neumorphic-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neumorphic-active:active {
+  transform: scale(0.98);
+}
+
+/* Градиенты для фонов */
+.gradient-bg {
+  background: linear-gradient(135deg, #f0f0f3 0%, #e8e8eb 100%);
+}
+
+/* Текстовые стили */
+.text-neumorphic-primary {
+  color: var(--text-primary);
+}
+
+.text-neumorphic-secondary {
+  color: var(--text-secondary);
+}
+
+/* Специальные эффекты */
+.neumorphic-glow {
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light), 0 0 20px rgba(66, 153, 225, 0.1);
+}
+
+.neumorphic-floating {
+  box-shadow: 8px 8px 20px var(--shadow-dark), -8px -8px 20px var(--shadow-light);
+}
+
+/* Фиксированная навигация */
+.fixed-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 375px;
+  z-index: 50;
+  background: var(--bg-primary);
+}
+
+/* Отступ для контента с фиксированной навигацией */
+.content-with-fixed-nav {
+  padding-bottom: calc(var(--bottom-nav-height, 60px) + 16px);
+}
